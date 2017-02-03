@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>{{main_article.title}}</h2>
+    <div class="article-info">{{main_article.published}} | {{main_article.author_full_name}}</div>
+    <img src="{{main_article.hero_image.url}}"  height="200px" id="hero-img">
+    <div class="content">
+    	{{main_article.body}}
+    </div>
+    
+    <div class="article-list">
+        {% for article in object_list %}
+            <h2>{{ article.title }}</h2>
+            <div class="summary">{{article.body | truncatewords:100}}</div>
+        {% endfor %}
+    </div>
+{% endblock %}
