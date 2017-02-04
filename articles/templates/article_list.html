@@ -1,18 +1,26 @@
 {% extends "base.html" %}
 
+{% block title %} Mywebsite | homepage {% endblock %}
+
 {% block content %}
 
-    <h2>{{main_article.title}}</h2>
+    <a href="{% url 'articles:article-detail' main_article.id %}"><h2>{{main_article.title}}</h2></a>
     <div class="article-info">{{main_article.published}} | {{main_article.author_full_name}}</div>
-    <img src="{{main_article.hero_image.url}}"  height="200px" id="hero-img">
+    <div id="hero-img"></div>
     <div class="content">
     	{{main_article.body}}
     </div>
     
     <div class="article-list">
         {% for article in object_list %}
-            <h2>{{ article.title }}</h2>
+            <a href="{% url 'articles:article-detail' article.id %}"><h2>{{ article.title }}</h2></a>
             <div class="summary">{{article.body | truncatewords:100}}</div>
         {% endfor %}
     </div>
+{% endblock %}
+
+{% block js %} 
+<script>
+   $("#hero-img").backstretch("{{main_article.hero_image.url}}");
+</script>
 {% endblock %}

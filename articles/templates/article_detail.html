@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} {{article.title | truncatewords:5}} {% endblock %}
+
+{% block content %}
+
+    <h2>{{article.title}}</h2>
+    <div class="article-info">{{article.published}} | {{article.author_full_name}}</div>
+    <div id="hero-img"></div>
+    <div class="content">
+        {{article.body}}
+    </div>
+    
+   
+{% endblock %}
+
+{% block js %} 
+<script>
+   $("#hero-img").backstretch("{{article.hero_image.url}}");
+</script>
+{% endblock %}

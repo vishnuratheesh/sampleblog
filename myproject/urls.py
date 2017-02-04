@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'', include('articles.urls')),
+    url(r'', include('articles.urls', namespace='articles'),),
     url(r'^admin/', include(admin.site.urls)),
     
 ]
