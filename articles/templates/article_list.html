@@ -13,8 +13,8 @@
     
     <div class="article-list">
         {% for article in object_list %}
-            <a href="{% url 'articles:article-detail' article.id %}"><h2>{{ article.title }}</h2></a>
-            <div class="summary">{{article.body | truncatewords:100}}</div>
+            <a href="{% url 'articles:article-detail' article.id %}"><h2>{{forloop.counter}}. {{ article.title }}</h2></a>
+            <div class="summary">{{article.body | truncatewords:20}}</div>
         {% endfor %}
     </div>
 {% endblock %}

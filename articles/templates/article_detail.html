@@ -8,7 +8,8 @@
     <div class="article-info">{{article.published}} | {{article.author_full_name}}</div>
     <div id="hero-img"></div>
     <div class="content">
-        {{article.body}}
+       {% if article.extra_image %} <div id="extra-img"></div> {% endif %}
+       {{article.body}}
     </div>
     
    
@@ -17,5 +18,8 @@
 {% block js %} 
 <script>
    $("#hero-img").backstretch("{{article.hero_image.url}}");
+   {% if article.extra_image %} 
+   $("#extra-img").backstretch("{{article.extra_image.url}}")
+   {% endif %}
 </script>
 {% endblock %}

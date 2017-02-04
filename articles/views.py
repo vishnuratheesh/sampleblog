@@ -2,6 +2,7 @@ import random
 from django.shortcuts import render
 from articles.models import Article
 from django.views.generic import ListView, DetailView
+from django.utils import timezone as tz
 
 
 def get_read_next():
@@ -19,7 +20,10 @@ class ArticleList(ListView):
         # Call the base implementation first to get a context
         context = super(ArticleList, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
-        context['main_article'] = Article.objects.get(pk=1)
+        all_articles  = Article.objects.filter(published__lt = tz.now())
+        print all_articles
+        main_article = random.sample(all_articles, 1)[0]
+        context['main_article'] = main_article
         context['read_next'] = get_read_next()
         return context
     
