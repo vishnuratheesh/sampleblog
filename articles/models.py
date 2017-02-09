@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone as tz
+from django.utils.text import slugify
+
 
 # Create your models here.
 
@@ -21,6 +23,8 @@ class Article(models.Model):
     body = models.TextField()
     hero_image = models.FileField(max_length=500, upload_to="images")
     extra_image = models.FileField(max_length=500, null=True, blank=True, upload_to="images")
+    category = models.ForeignKey(Category, related_name="articles", null=True, blank=True)
+    slug= models.SlugField(default='', blank=True)
     
     def author_full_name(self):
         return " ".join([self.author.first_name, self.author.last_name])
@@ -31,4 +35,9 @@ class Article(models.Model):
             title += "..."
         return title
     
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super(Article, self).save(*args, **kwargs)
+            
     
