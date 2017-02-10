@@ -1,10 +1,12 @@
+{% verbatim %}
+
 <div class="row">
-    {% for article in read_next %}
-    <div class="col-md-3">
-        <a href="{% url 'articles:article-detail' article.id %}">
-        <div class="article-link-img" id="read-next-{{forloop.counter}}"></div>
+    <div class="col-md-3" ng-repeat="article in read_next">
+        <a ui-sref="article-detail({slug: article.slug})">
+        <div class="article-link-img" id="read-next-{{$index}}"></div>
         <div class="title">{{article.title}}</div>
         </a>
     </div>
-    {% endfor %}
 </div>
+
+{% endverbatim %}

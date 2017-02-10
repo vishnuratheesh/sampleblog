@@ -1,25 +1,15 @@
-{% extends "base.html" %}
+{% verbatim %}
 
-{% block title %} {{article.title | truncatewords:5}} {% endblock %}
-
-{% block content %}
-
+<div ng-controller="articleDetailCtrl">
     <h2>{{article.title}}</h2>
     <div class="article-info">{{article.published}} | {{article.author_full_name}}</div>
     <div id="hero-img"></div>
     <div class="content">
-       {% if article.extra_image %} <div id="extra-img"></div> {% endif %}
+       <div ng-if="article.extra_image" id="extra-img"></div>
        {{article.body}}
     </div>
     
-   
-{% endblock %}
+</div>
+{% endverbatim %}   
 
-{% block js %}
-<script>
-   $("#hero-img").backstretch("{{article.hero_image.url}}");
-   {% if article.extra_image %} 
-   $("#extra-img").backstretch("{{article.extra_image.url}}")
-   {% endif %}
-</script>
-{% endblock %}
+

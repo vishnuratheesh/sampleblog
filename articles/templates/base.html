@@ -1,15 +1,15 @@
-{% load static %}
+{% load mytags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
   </head>
-  <body>
+  <body ng-app="baseApp" ng-controller="baseCtrl">
 	 <meta charset="utf-8">
 	 <title>{% block title %}{% endblock %}</title>
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
 	 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	 <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" media="screen">
-	 <link rel="stylesheet" href="{% static 'css/app.css' %}" media="screen">
+	 <link rel="stylesheet" href="{% mystatic 'css/bootstrap.min.css' %}" media="screen">
+	 <link rel="stylesheet" href="{% mystatic 'css/app.css' %}" media="screen">
 	 
 	 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	 <!--[if lt IE 9]>
@@ -38,7 +38,8 @@
 				{% include 'side_nav.html' %}
 			</div>
 			<div class="col-md-10">
-				{% block content %} {% endblock %}
+				 
+				 <ui-view></ui-view>
 				
 				<div id="section-read-next">
 				<h2 class="section-header">What to read next?</h2>
@@ -58,13 +59,19 @@
 
 	
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% mystatic 'js/bootstrap.min.js' %}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="{% mystatic 'js/underscore-min.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.6.1/restangular.min.js"></script>
+	<script src="http://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+	
 	{% for article in read_next %}
 	<script>
-	  $("#read-next-{{forloop.counter}}").backstretch("{{article.hero_image.url}}");
+	//  $("#read-next-{{forloop.counter}}").backstretch("{{article.hero_image.url}}");
 	</script>
 	{% endfor %}
+	<script src="{% mystatic 'js/base.js' %}"></script>
     {% block js %} {% endblock %}
   </body>
 </html>
